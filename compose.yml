@@ -1,14 +1,14 @@
 ---
-version:  '3.8'
+version: '3.8'
+
 services:
   db:
     image: dbimage:latest
     ports:
       - "3306:3306"
     networks:
-      mynet:
-        aliases:
-          - db
+      - mynet
+
   auth:
     image: authimage:latest
     ports:
@@ -17,6 +17,7 @@ services:
       mynet:
         aliases:
           - auth_service
+
   bookcont:
     image: bookimage:latest
     ports:
@@ -25,6 +26,7 @@ services:
       mynet:
         aliases:
           - book_service
+
   borrowcont:
     image: borrowimage:latest
     ports:
@@ -33,17 +35,14 @@ services:
       mynet:
         aliases:
           - borrow_service
+
   frontend:
     image: appimage:latest
     ports:
       - "5000:5000"
     networks:
-      mynet:
-        aliases:
-          - frontend
-  
+      - mynet
+
 networks:
-  default:
-    external:
-      name: mynet
-    
+  mynet:
+    external: true
