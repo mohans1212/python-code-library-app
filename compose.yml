@@ -9,33 +9,27 @@ services:
     networks:
       - mynet
 
-  auth:
+  auth_service:
     image: authimage:latest
     ports:
       - "5001:5001"
     networks:
-      mynet:
-        aliases:
-          - auth_service
+      - mynet
 
-  bookcont:
+  book_service:
     image: bookimage:latest
     ports:
       - "5002:5002"
     networks:
-      mynet:
-        aliases:
-          - book_service
+      - mynet
 
-  borrowcont:
+  borrow_service:
     image: borrowimage:latest
     ports:
       - "5003:5003"
     networks:
-      mynet:
-        aliases:
-          - borrow_service
-
+      - mynet
+      
   frontend:
     image: appimage:latest
     ports:
