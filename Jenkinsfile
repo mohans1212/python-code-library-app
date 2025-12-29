@@ -19,15 +19,7 @@ pipeline{
         }
         stage("Deploy Containers"){
             steps{
-
-                sh 'docker stop $(docker ps -a -q) || true'
-                sh 'docker rm $(docker ps -a -q) || true'
-                sh 'docker run -d --name dbcontainer --network mynet dbimage'
-                sh 'docker run -d --name authcontainer --network mynet authimage'
-                sh 'docker run -d --name bookcontainer --network mynet bookimage'
-                sh 'docker run -d --name borrowcontainer --network mynet borrowimage'
-                sh 'docker run -d --name frontend -p 5000:5000 --network mynet appimage'
-           
+                sh 'docker-compose up -d'
             }
         }
     }
