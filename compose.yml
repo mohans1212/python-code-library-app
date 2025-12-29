@@ -3,29 +3,44 @@ version:  '3.8'
 services:
   db:
     image: dbimage:latest
-    container_name: db
     ports:
       - "3306:3306"
+    networks:
+      mynet:
+        aliases:
+          - db
   auth:
     image: authimage:latest
-    container_name: auth_service  
     ports:
       - "5001:5001"
+    networks:
+      mynet:
+        aliases:
+          - auth_service
   bookcont:
     image: bookimage:latest
-    container_name: book_service
     ports:
       - "5002:5002"
+    networks:
+      mynet:
+        aliases:
+          - book_service
   borrowcont:
     image: borrowimage:latest
-    container_name: borrow_service
     ports:
       - "5003:5003"
+    networks:
+      mynet:
+        aliases:
+          - borrow_service
   frontend:
     image: appimage:latest
-    container_name: frontend
     ports:
       - "5000:5000"
+    networks:
+      mynet:
+        aliases:
+          - frontend
   
 networks:
   default:
